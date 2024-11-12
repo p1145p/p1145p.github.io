@@ -13,6 +13,7 @@ window.addEventListener('DOMContentLoaded', function () {
         navigateTo('login');
     }
     // 移除加载遮罩
+    document.title = window.config.title;
     const loadingOverlay = document.getElementById('loading-overlay');
     loadingOverlay.parentNode.removeChild(loadingOverlay);
 });
@@ -40,8 +41,8 @@ function login() {
 
     // 创建一个 FormData 对象并定义登录请求值
     const formData = {
-        email: document.getElementById('email').value,
-        password: document.getElementById('password').value
+        email: document.getElementById('login_email').value,
+        password: document.getElementById('login_password').value
     };
     // 调用网络请求函数
     post(url, formData)
@@ -114,15 +115,17 @@ async function validate() {
 }
 
 // 注册函数
-function login() {
+function register() {
 
     //拼接登录api
-    var url = window.config.host + `api/v1/passport/auth/login`;
+    var url = window.config.host + `api/v1/passport/auth/register`;
 
     // 创建一个 FormData 对象并定义登录请求值
     const formData = {
-        email: document.getElementById('email').value,
-        password: document.getElementById('password').value
+        email: document.getElementById('register_email').value,
+        email_code: document.getElementById('register_validate').value,
+        invite_code: document.getElementById('register_invitation').value,
+        password: document.getElementById('register_password').value
     };
     // 调用网络请求函数
     post(url, formData)
