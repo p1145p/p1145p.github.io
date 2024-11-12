@@ -85,7 +85,7 @@ async function validate() {
     function turnstile_send(turnstile) {
         // 进入正常流程
         const formData = {
-            email: document.getElementById('email').value,
+            email: document.getElementById('register_email').value,
             recaptcha_data: turnstile
         };
         post(url, formData)
@@ -96,7 +96,7 @@ async function validate() {
     function send() {
         // 进入正常流程
         const formData = {
-            email: document.getElementById('email').value
+            email: document.getElementById('register_').value
         };
         post(url, formData)
             .then(handleResponse)
