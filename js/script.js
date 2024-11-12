@@ -83,6 +83,8 @@ async function validate() {
 
     function turnstile_send(turnstile) {
         // 进入正常流程
+        // 验证结束，删除验证码小组件
+        turnstile.remove()
         const formData = {
             email: document.getElementById('email').value,
             recaptcha_data: turnstile
