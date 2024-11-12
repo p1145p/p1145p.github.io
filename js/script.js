@@ -40,8 +40,8 @@ function login() {
 
     // 创建一个 FormData 对象并定义登录请求值
     const formData = {
-        email: document.getElementById('login_email').value,
-        password: document.getElementById('login_password').value
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value
     };
     // 调用网络请求函数
     post(url, formData)
@@ -84,7 +84,7 @@ async function validate() {
     function turnstile_send(turnstile) {
         // 进入正常流程
         const formData = {
-            email: document.getElementById('register_email').value,
+            email: document.getElementById('email').value,
             recaptcha_data: turnstile
         };
         post(url, formData)
@@ -95,7 +95,7 @@ async function validate() {
     function send() {
         // 进入正常流程
         const formData = {
-            email: document.getElementById('register_email').value
+            email: document.getElementById('email').value
         };
         post(url, formData)
             .then(handleResponse)
@@ -111,4 +111,23 @@ async function validate() {
                 sendsnackbar(response.message);
         }
     }
+}
+
+// 注册函数
+function login() {
+
+    //拼接登录api
+    var url = window.config.host + `api/v1/passport/auth/login`;
+
+    // 创建一个 FormData 对象并定义登录请求值
+    const formData = {
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value
+    };
+    // 调用网络请求函数
+    post(url, formData)
+        .then(response => {
+            sendsnackbar(response.message);
+        })
+
 }
