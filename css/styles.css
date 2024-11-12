@@ -1,0 +1,75 @@
+/* 加载遮罩 */
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+#loading-overlay .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#loading-overlay .content mdui-circular-progress {
+    margin-bottom: 10px;
+}
+/* 页面设置 */
+body {
+    background-color: #f5f5f5;
+}
+.mdui-container {
+    max-width: 600px;
+    margin: auto;
+}
+.mdui-card {
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+.mdui-card-content {
+    padding: 20px;
+}
+.mdui-card-actions {
+    padding: 10px;
+    text-align: right;
+}
+.mdui-textfield {
+    width: 100%;
+}
+
+/* 登录页下方功能链接 */
+.flex-center {
+    display: flex;
+    justify-content: center; /* 水平居中对齐子元素 */
+    align-items: center; /* 垂直居中对齐子元素 */
+    font-weight: 900; /* 字体粗细为黑色（最粗） */
+    gap: 8px;
+}
+
+.justify-end {
+    justify-content: flex-end; /* 子元素对齐到容器的末端 */
+}
+
+.font-black {
+    font-weight: 900; /* 字体粗细为黑色（最粗） */
+}
+
+.gap-5 {
+    gap: 5px; /* 设置子元素之间的间距 */
+}
+
+.text-gray {
+    color: #8c8c8c; /* 文字颜色为灰色 */
+}
+
+.text-blue {
+    color: #0b7fe9; /* 文字颜色为浅蓝色 */
+}
+
+.cursor-pointer {
+    cursor: pointer; /* 鼠标光标设置为指针形状 */
+}
