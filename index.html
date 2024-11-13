@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>加载中</title>
+    <title>加载中...</title>
     <!-- 引入mdui组件 -->
     <script src="https://s4.zstatic.net/ajax/libs/mdui/2.1.3/mdui.global.min.js" async></script>
     <link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/mdui/2.1.3/mdui.css" />
@@ -12,14 +12,12 @@
     <!-- cloudflare turnstile 反机器人 -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
     <!-- cloudflare Web Analytics 统计信息 -->
-    <!-- <script defer src='https://static.cloudflareinsights.com/beacon.min.js' -->
-        <!-- data-cf-beacon='{"token": "ae688af9b6f947bca1a7304fef565bf8"}' defer></script> -->
-    <!-- 引入基础组件 -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
+        data-cf-beacon='{"token": "ae688af9b6f947bca1a7304fef565bf8"}' defer></script>
     <!-- 引入配置文件 -->
     <script src="./config.js"></script>
-
-    <link rel="stylesheet" href="./css/styles.css">
     <script src="./js/script.js"></script>
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 
 <body class="mdui-theme-primary-indigo mdui-theme-accent-indigo">
@@ -39,11 +37,12 @@
                     <mdui-text-field variant="outlined" label="电子邮箱" value="" id="login_email"></mdui-text-field>
                 </div>
                 <div class="mdui-textfield">
-                    <mdui-text-field variant="outlined" type="password" toggle-password label="密码" id="login_password"></mdui-text-field>
+                    <mdui-text-field variant="outlined" type="password" toggle-password label="密码"
+                        id="login_password"></mdui-text-field>
                 </div>
             </div>
             <div class="mdui-card-actions">
-                <mdui-button full-width onclick="login()">登录</mdui-button>
+                <mdui-button full-width onclick="login()">立即登录</mdui-button>
                 <div class="flex-center">
                     <p class="text-gray">还没账号？</p>
                     <a onclick="navigateTo('register')" class="text-blue cursor-pointer underline">立即注册</a>
@@ -65,20 +64,50 @@
                     <mdui-text-field variant="outlined" label="验证码" value="" id="register_validate"></mdui-text-field>
                 </div>
                 <div class="mdui-textfield">
-                    <mdui-text-field variant="outlined" type="password" toggle-password label="密码" id="register_password"></mdui-text-field>
+                    <mdui-text-field variant="outlined" type="password" toggle-password label="密码"
+                        id="register_password"></mdui-text-field>
                 </div>
                 <div class="mdui-textfield">
                     <mdui-text-field variant="outlined" label="邀请码" id="register_invitation"></mdui-text-field>
                 </div>
             </div>
             <div class="mdui-card-actions">
-                <mdui-button full-width onclick="register()">注册</mdui-button>
+                <mdui-button full-width onclick="register()">立即注册</mdui-button>
                 <div class="flex-center">
                     <p class="text-gray">已经有账号了？</p>
                     <a onclick="navigateTo('login')" class="text-blue cursor-pointer underline">立即登录</a>
                 </div>
             </div>
         </div>
+        <div id="forgot-form">
+            <div class="mdui-card-content">
+                <h2 class="mdui-text-center">重置密码</h2>
+                <div class="mdui-textfield">
+                    <mdui-text-field variant="outlined" label="电子邮箱" value="" id="forgot_email">
+                        <mdui-button variant="outlined" slot="suffix" onclick="sendEmailVerify()">发送验证码</mdui-button>
+                    </mdui-text-field>
+
+                </div>
+
+                <div class="mdui-textfield">
+                    <mdui-text-field variant="outlined" label="验证码" value="" id="forgot_validate"></mdui-text-field>
+                </div>
+                <div class="mdui-textfield">
+                    <mdui-text-field variant="outlined" type="password" toggle-password label="密码" id="forgotpassword"></mdui-text-field>
+                </div>
+            </div>
+            <div class="mdui-card-actions">
+                <mdui-button full-width onclick="forgot()">立即重置</mdui-button>
+                <div class="flex-center">
+                    <p class="text-gray">已经有账号了？</p>
+                    <a onclick="navigateTo('login')" class="text-blue cursor-pointer underline">立即登录</a>
+                </div>
+            </div>
+        </div>
+        <div id="dashboard"></div>
+        <div id="store"></div>
+        <div id="header"></div>
+        <div id="sidebar"></div>
     </div>
 </body>
 

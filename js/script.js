@@ -3,35 +3,87 @@
 // 此文件包括页面加载逻辑以及页面操作调用逻辑
 // 
 // 
-
-// 初始化页面
-window.addEventListener('DOMContentLoaded', function () {
-    const path = window.location.hash;
-    if (path === '#/register') {
-        navigateTo('register');
-    } else {
-        navigateTo('login');
-    }
-    // 移除加载遮罩
-    document.title = window.config.title;
-    const loadingOverlay = document.getElementById('loading-overlay');
-    loadingOverlay.parentNode.removeChild(loadingOverlay);
-});
-
 // 单页路由函数
 function navigateTo(page) {
-    const loginForm = document.getElementById('login-form');
-    const registerForm = document.getElementById('register-form');
-    if (page === 'login') {
-        loginForm.style.display = 'block';
-        registerForm.style.display = 'none';
-        window.history.pushState({}, '', '#/login');
-    } else if (page === 'register') {
-        loginForm.style.display = 'none';
-        registerForm.style.display = 'block';
-        window.history.pushState({}, '', '#/register');
+    const pages = {
+        'login': {
+            element: document.getElementById('login-form'),
+            path: '#/login'
+        },
+        'register': {
+            element: document.getElementById('register-form'),
+            path: '#/register'
+        },
+        'forgot': {
+            element: document.getElementById('forgot-form'),
+            path: '#/forgot'
+        },
+        'dashboard': {
+            element: document.getElementById('dashboard'),
+            path: '#/dashboard'
+        },
+        'store': {
+            element: document.getElementById('store'),
+            path: '#/dashboard/store'
+        }
+    };
+
+    const header = document.getElementById('header');
+    const sidebar = document.getElementById('sidebar');
+
+    if (pages[page]) {
+        for (let key in pages) {
+            pages[key].element.style.display = 'none';
+        }
+        pages[page].element.style.display = 'block';
+        
+        // 特定页面不显示顶边栏和侧边栏
+        if (page === 'login' || page === 'register' || page === 'forgot') {
+            header.style.display = 'none';
+            sidebar.style.display = 'none';
+        } else {
+            header.style.display = 'block';
+            sidebar.style.display = 'block';
+        }
+        
+        window.history.pushState({}, '', pages[page].path);
+    } else {
+        console.error('Invalid page:', page);
     }
 }
+
+// 页面加载时设置路由
+window.addEventListener('DOMContentLoaded', function () {
+    const path = window.location.hash;
+    document.title = window.config.title;
+
+    // 移除加载遮罩
+    const loadingOverlay = document.getElementById('loading-overlay');
+    loadingOverlay.parentNode.removeChild(loadingOverlay);
+
+    // 默认页面
+    let defaultPage = 'login';
+
+    // 根据 URL 路径确定要显示的页面
+    switch (path) {
+        case '#/register':
+            navigateTo('register');
+            break;
+        case '#/forgot':
+            navigateTo('forgot');
+            break;
+        case '#/dashboard':
+            navigateTo('dashboard');
+            break;
+        case '#/dashboard/store':
+            navigateTo('store');
+            break;
+        case '#/login':
+        default:
+            navigateTo(defaultPage);
+            break;
+    }
+});
 
 // 登陆函数
 function login() {
@@ -129,6 +181,29 @@ async function register() {
                 email_code: document.getElementById('register_validate').value,
                 invite_code: document.getElementById('register_invitation').value,
                 password: document.getElementById('register_password').value,
+                recaptcha_data: token
+            };
+            post(url, formData)
+                .then(response => sendsnackbar(response.message))
+                .catch(() => sendsnackbar("网络或服务器错误"));
+        },
+        () => {
+            // 验证失败，不执行任何操作
+            sendsnackbar("人机验证未通过");
+        }
+    );
+}
+
+// 重置密码函数
+async function forgot() {
+    const url = window.config.host + `api/v1/passport/auth/forget`;
+    verifyRecaptcha(
+        (token) => {
+            // 进入注册流程
+            const formData = {
+                email: document.getElementById('forgot_email').value,
+                email_code: document.getElementById('forgotr_validate').value,
+                password: document.getElementById('forgot_password').value,
                 recaptcha_data: token
             };
             post(url, formData)
