@@ -56,11 +56,11 @@
                 <h2 class="mdui-text-center">注册</h2>
                 <div class="mdui-textfield">
                     <mdui-text-field variant="outlined" label="电子邮箱" value="" id="register_email">
-                        <mdui-button variant="outlined" slot="suffix" onclick="validate()">发送验证码</mdui-button>
+                        <mdui-button variant="outlined" slot="suffix" onclick="sendEmailVerify()">发送验证码</mdui-button>
                     </mdui-text-field>
 
                 </div>
-                <div id="turnstile-container"></div>
+
                 <div class="mdui-textfield">
                     <mdui-text-field variant="outlined" label="验证码" value="" id="register_validate"></mdui-text-field>
                 </div>
