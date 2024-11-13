@@ -157,6 +157,7 @@ async function sendEmailVerify() {
             // 进入正常流程
             const formData = {
                 email: document.getElementById('register_email').value,
+                email: document.getElementById('forgot_email').value,
                 recaptcha_data: token
             };
             post(url, formData)
