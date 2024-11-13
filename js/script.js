@@ -203,7 +203,7 @@ async function forgot() {
             // 进入注册流程
             const formData = {
                 email: document.getElementById('forgot_email').value,
-                email_code: document.getElementById('forgotr_validate').value,
+                email_code: document.getElementById('forgot_validate').value,
                 password: document.getElementById('forgot_password').value,
                 recaptcha_data: token
             };
